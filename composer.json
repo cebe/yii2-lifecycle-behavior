@@ -1,0 +1,38 @@
+{
+	"name": "cebe/yii2-lifecycle-behavior",
+	"description": "Define the lifecycle of a model by defining allowed satus changes.",
+	"keywords": ["yii2", "model", "validation", "lifecycle"],
+	"homepage": "https://github.com/cebe/markdown#readme",
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Carsten Brandt",
+			"email": "mail@cebe.cc",
+			"homepage": "http://cebe.cc/",
+			"role": "Creator"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/cebe/yii2-lifecycle-behavior/issues",
+		"source": "https://github.com/cebe/yii2-lifecycle-behavior"
+	},
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "~2.0.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "4.1.*",
+		"cebe/indent": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"cebe\\lifecycle\\": ""
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0.x-dev"
+		}
+	}
+}

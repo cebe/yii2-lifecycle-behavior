@@ -1,7 +1,7 @@
 Yii 2 lifecycle behavior
 ========================
 
-Define the lifecycle of a model by defining allowed satus changes.
+Define the lifecycle of a model by defining allowed status changes.
 
 
 Installation

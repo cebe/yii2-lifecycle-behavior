@@ -7,7 +7,7 @@ Define the lifecycle of a model by defining allowed satus changes.
 Installation
 ------------
 
-This is an extension for the [Yii 2](http://www.yiiframework.com/).
+This is an extension for the [Yii 2](http://www.yiiframework.com/) PHP framework.
 
 Installation is recommended to be done via [composer][] by running:
 

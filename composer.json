@@ -1,6 +1,6 @@
 {
 	"name": "cebe/yii2-lifecycle-behavior",
-	"description": "Define the lifecycle of a model by defining allowed satus changes.",
+	"description": "Define the lifecycle of a model by defining allowed satus changes in terms of a state machine.",
 	"keywords": ["yii2", "model", "validation", "lifecycle"],
 	"homepage": "https://github.com/cebe/markdown#readme",
 	"type": "library",

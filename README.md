@@ -1,7 +1,7 @@
 Yii 2 lifecycle behavior
 ========================
 
-Define the lifecycle of a model by defining allowed status changes.
+Define the lifecycle of a model by defining allowed status changes in terms of a state machine.
 
 
 Installation
@@ -52,7 +52,7 @@ The following example shows how to define the allowed status changes:
 	}
 ```
 
-The above state transitions can be visualized as follows:
+The above state transitions can be visualized as the following state machine:
 
 ![Visualization of state transitions](example.png)
 

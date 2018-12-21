@@ -8,6 +8,8 @@ php:
   - '7.3'
   - nightly
 
-install: make install
+install:
+  - composer require --dev cebe/assetfree-yii2 --prefer-dist --no-interaction
+  - composer install --prefer-dist --no-interaction
 script:
   - make test

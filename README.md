@@ -17,7 +17,7 @@ Alternatively you can add the following to the `require` section in your `compos
 and run `composer update` afterwards:
 
 ```json
-"cebe/yii2-lifecycle-behavior": "~1.0.0"
+"cebe/yii2-lifecycle-behavior": "~2.0.0"
 ```
 
 [composer]: https://getcomposer.org/ "The PHP package manager"
@@ -39,7 +39,7 @@ The following example shows how to define the allowed status changes:
 	{
 		return [
 			'lifecycle' => [
-				'class' => 'cebe\lifecycle\LifecycleBehavior',
+				'class' => cebe\lifecycle\LifecycleBehavior::class,
 				'validStatusChanges' => [
 					'draft'     => ['ready', 'delivered'],
 					'ready'     => ['draft', 'delivered'],
@@ -56,5 +56,33 @@ The above state transitions can be visualized as the following state machine:
 
 ![Visualization of state transitions](example.png)
 
-
 [ActiveRecord]: http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
+
+## Status field validation
+
+By default, the behavior will validate the `status` attribute of the record, when `validate()` or `save()` is called
+and add a validation error in case state has changed in a way that is not allowed.
+
+- The attribute to validate can be configured by setting the `statusAttribute` property of the behavior.
+- The error message can be configured by setting the `validationErrorMessage` property of the behavior.
+  The place holders `{old}` and `{new}` are being replaced with the corresponding status values.
+
+## Program flow validation
+
+The behavior may also be used to validate status changes in program flow. This is different to user input validation as
+described above, because program flow will be aborted by an exception in this case.
+For user input, the recipient of the error message is the user, when status is not changed by the user,
+the recipient of the error is the developer.
+
+## Configuring different validation methods
+
+By default status field is validated both, on validation and on update. To disable one of the methods, you may configure
+the `$events` propery, which is by default:
+
+```php
+'events' => [
+    BaseActiveRecord::EVENT_BEFORE_VALIDATE => 'handleBeforeValidate',
+    BaseActiveRecord::EVENT_BEFORE_UPDATE => 'handleBeforeSave',
+]
+```
+

@@ -10,12 +10,13 @@ namespace cebe\lifecycle;
 use Yii;
 use yii\base\Behavior;
 use yii\base\Event;
+use yii\db\ActiveRecord;
 use yii\db\BaseActiveRecord;
 
 /**
  * Behavior that defines a models lifecycle.
  *
- * This behavior only works with ActiveRecord because it relies on the old-attribute feature
+ * This behavior only works with [[ActiveRecord]] because it relies on the old-attribute feature
  * which is not available in `yii\base\Model`.
  * 
  * @author Carsten Brandt <mail@cebe.cc>
@@ -39,6 +40,13 @@ class LifecycleBehavior extends Behavior
 	 * The place holders `{old}` and `{new}` are being replaced with the corresponding status values.
 	 */
 	public $validationErrorMessage = 'Invalid status change: "{old}" to "{new}"';
+	/**
+	 * @var array events handled by the behavior.
+	 */
+	public $events = [
+		BaseActiveRecord::EVENT_BEFORE_VALIDATE => 'handleBeforeValidate',
+		BaseActiveRecord::EVENT_BEFORE_UPDATE => 'handleBeforeSave',
+	];
 
 
 	/**
@@ -46,27 +54,54 @@ class LifecycleBehavior extends Behavior
 	 */
 	public function events()
 	{
-		return [
-			'beforeValidate' => 'handleBeforeValidate',
-		];
+		return $this->events;
 	}
 
 	/**
-	 * validate the status change
-	 * @param Event $event the event that is being handled.
+	 * Check whether a status change is valid.
+	 * @param string $old old status.
+	 * @param string $new new status.
+	 * @return boolean `true` if status change is valid, `false`, if not.
 	 */
-	public function handleBeforeValidate($event)
+	public function isStatusChangeValid($old, $new)
+	{
+		if ($old == $new) {
+			return true;
+		}
+		if (!isset($this->validStatusChanges[$old])) {
+			return true;
+		}
+		return in_array($new, $this->validStatusChanges[$old], false);
+	}
+
+	/**
+	 * validate the status change, add validation error if it is invalid.
+	 */
+	public function handleBeforeValidate()
 	{
 		/** @var BaseActiveRecord $owner */
 		$owner = $this->owner;
 		$old = $owner->getOldAttribute($this->statusAttribute);
 		$new = $owner->getAttribute($this->statusAttribute);
-		if ($old != $new && isset($this->validStatusChanges[$old])) {
-			if (!in_array($new, $this->validStatusChanges[$old])) {
-				$params = ['new' => $new, 'old' => $old];
-				$error = Yii::$app->getI18n()->format($this->validationErrorMessage, $params, Yii::$app->language);
-				$owner->addError($this->statusAttribute, $error);
-			}
+		if (!$this->isStatusChangeValid($old, $new)) {
+			$params = ['new' => $new, 'old' => $old];
+			$error = Yii::$app->getI18n()->format($this->validationErrorMessage, $params, Yii::$app->language);
+			$owner->addError($this->statusAttribute, $error);
 		}
 	}
+
+	/**
+	 * validate the status change, throw exception if it is invalid.
+	 */
+	public function handleBeforeSave()
+	{
+		/** @var BaseActiveRecord $owner */
+		$owner = $this->owner;
+		$old = $owner->getOldAttribute($this->statusAttribute);
+		$new = $owner->getAttribute($this->statusAttribute);
+		if (!$this->isStatusChangeValid($old, $new)) {
+			throw new StatusChangeNotAllowedException($old, $new);
+		}
+	}
+
 }

@@ -84,8 +84,7 @@ class LifecycleBehavior extends Behavior
 		$old = $owner->getOldAttribute($this->statusAttribute);
 		$new = $owner->getAttribute($this->statusAttribute);
 		if (!$this->isStatusChangeValid($old, $new)) {
-			$params = ['new' => $new, 'old' => $old];
-			$error = Yii::$app->getI18n()->format($this->validationErrorMessage, $params, Yii::$app->language);
+			$error = strtr($this->validationErrorMessage, ['{new}' => $new, '{old}' => $old]);
 			$owner->addError($this->statusAttribute, $error);
 		}
 	}

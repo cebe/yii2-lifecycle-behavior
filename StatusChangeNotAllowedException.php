@@ -23,6 +23,7 @@ class StatusChangeNotAllowedException extends \Exception
 	 */
 	public $new;
 
+
 	/**
 	 * StatusChangeNotAllowedException constructor.
 	 * @param string  $old old status.

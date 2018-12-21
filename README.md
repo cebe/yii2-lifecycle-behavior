@@ -3,6 +3,11 @@ Yii 2 lifecycle behavior
 
 Define the lifecycle of a model by defining allowed status changes in terms of a state machine.
 
+[![Latest Stable Version](https://poser.pugx.org/cebe/yii2-lifecycle-behavior/v/stable)](https://packagist.org/packages/cebe/yii2-lifecycle-behavior)
+[![Total Downloads](https://poser.pugx.org/cebe/yii2-lifecycle-behavior/downloads)](https://packagist.org/packages/cebe/yii2-lifecycle-behavior)
+[![License](https://poser.pugx.org/cebe/yii2-lifecycle-behavior/license)](https://packagist.org/packages/cebe/yii2-lifecycle-behavior)
+[![Build Status](https://travis-ci.org/cebe/yii2-lifecycle-behavior.svg?branch=master)](https://travis-ci.org/cebe/yii2-lifecycle-behavior)
+
 
 Installation
 ------------

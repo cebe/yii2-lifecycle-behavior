@@ -4,8 +4,8 @@ example.png: example.dot
 
 fix-style:
 	vendor/bin/indent --tabs composer.json
-	vendor/bin/indent --tabs LifecycleBehavior.php
-	vendor/bin/indent --tabs StatusChangeNotAllowedException.php
+	vendor/bin/indent --tabs src/LifecycleBehavior.php
+	vendor/bin/indent --tabs src/StatusChangeNotAllowedException.php
 
 install:
 	composer install --prefer-dist --no-interaction

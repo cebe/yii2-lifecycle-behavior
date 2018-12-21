@@ -27,12 +27,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"cebe\\lifecycle\\": ""
+			"cebe\\lifecycle\\": "src/"
 		}
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "1.0.x-dev"
+			"dev-master": "2.0.x-dev"
 		}
 	}
 }

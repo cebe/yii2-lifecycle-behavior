@@ -70,7 +70,7 @@ and add a validation error in case state has changed in a way that is not allowe
 ## Program flow validation
 
 The behavior may also be used to validate status changes in program flow. This is different to user input validation as
-described above, because program flow will be aborted by an exception in this case.
+described above, because program flow will be aborted by an [exception](StatusChangeNotAllowedException.php) in this case.
 For user input, the recipient of the error message is the user, when status is not changed by the user,
 the recipient of the error is the developer.
 

@@ -22,7 +22,7 @@
 		"yiisoft/yii2": "~2.0.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^6.5",
+		"phpunit/phpunit": "^5.7",
 		"cebe/indent": "*"
 	},
 	"autoload": {
